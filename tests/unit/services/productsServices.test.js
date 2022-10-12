@@ -33,5 +33,20 @@ describe('Testes de unidade do service de produtos', function () {
 
     const result = await productService.getById('a');
     expect(result.type).to.equal('INVALID_VALUE');
+  });
+
+  describe('Realizando uma operação INSERT', function () {
+    it('Com valores inválidos', async function () {
+      const result = await productService.createProduct('aa')
+
+      expect(result.type).to.equal('INVALID_VALUE');
+      expect(result.response.message).to.equal('"name" length must be at least 5 characters long')
+    })
+
+    it('Com valores válidos', async function () {
+      const result = await productService.createProduct('ProductX');
+
+      expect(result.type).to.equal(null);
+    })
   })
 })

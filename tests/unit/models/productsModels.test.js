@@ -21,4 +21,10 @@ describe('Testes de unidade do model de produtos', function () {
     const result = await productsModel.findById(1);
     expect(result).to.be.deep.equal(products.oneProduct)
   })
+
+  it('Realizando uma operação INSERT com o model products', async function () {
+    sinon.stub(connection, 'execute').resolves([{ insertId: 1 }]);
+    const result = await productsModel.insert(products.oneProduct[0].name);
+    expect(result).to.be.deep.equal(products.oneProduct[0])
+  })
 })

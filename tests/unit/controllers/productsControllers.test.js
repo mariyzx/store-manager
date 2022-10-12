@@ -54,4 +54,36 @@ describe('Teste de unidade do controller de produtos', function () {
 
     expect(res.status).to.have.been.calledWith(404)
   })
+
+  describe('Realizando uma operação INSERT', function () {
+    it('Com valores inválidos', async function () {
+      const res = {}
+      const req = { params: {}, body: { name: 'aa' } };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      sinon
+        .stub(productsService, 'createProduct')
+        .resolves({ type: 'INVALID_VALUE', response: { message: '"name" must be at least 5 characters long' } });
+      
+      await productsController.createProduct(req, res);
+
+      expect(res.status).to.have.been.calledWith(422)
+    })
+
+    it('Com valores válidos', async function () {
+      const res = {}
+      const req = { params: {}, body: { name: 'ProductX' } };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      sinon
+        .stub(productsService, 'createProduct')
+        .resolves({ type: null, response: { message: { id: 6, name: 'ProdutoX' } } });
+
+      await productsController.createProduct(req, res);
+
+      expect(res.status).to.have.been.calledWith(201)
+    })
+  })
 })
