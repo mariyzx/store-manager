@@ -20,11 +20,12 @@ const getById = async (id) => {
 
 const createProduct = async (product) => {
   const error = validateName(product);
+
   if (error.type) return error;
 
   const newProduct = await productsModel.insert(product);
 
-  return { type: null, message: newProduct };
+  return { type: null, response: newProduct };
 };
 
 module.exports = { getAll, getById, createProduct };
