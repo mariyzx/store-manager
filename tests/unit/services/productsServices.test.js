@@ -49,4 +49,20 @@ describe('Testes de unidade do service de produtos', function () {
       expect(result.type).to.equal(null);
     })
   })
+
+  describe('Realizando uma operação DELETE', function () {
+    it('Deletando um produto a partir de seu id válido', async function () {
+      sinon.stub(productModel.productsModel, 'deleteById').resolves(products.oneProduct);
+
+      const result = await productService.productsService.deleteById(1);
+      expect(result.type).to.equal(null)
+    });
+
+    it('Deletando um produto a partir de seu id inválido', async function () {
+      sinon.stub(productModel.productsModel, 'deleteById').resolves(products.oneProduct);
+
+      const result = await productService.productsService.deleteById('aaaa');
+      expect(result.type).to.equal('INVALID_VALUE')
+    })
+  })
 })
