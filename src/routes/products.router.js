@@ -4,10 +4,10 @@ const validateNewProductFields = require('../middlewares/validateNewProductField
 
 const router = express.Router();
 
-router.get('/', productsController.listProducts);
+router.get('/', productsController.productsController.listProducts);
 
-router.get('/:id', productsController.listById);
+router.get('/:id', productsController.productsController.listById);
 
-router.post('/', validateNewProductFields, productsController.createProduct);
+router.post('/', validateNewProductFields, productsController.productsController.createProduct);
 
 module.exports = router;

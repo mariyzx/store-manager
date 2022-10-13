@@ -20,7 +20,7 @@ describe('Teste de unidade do controller de produtos', function () {
       .stub(productsService, 'getAll')
       .resolves({ type: null, message: products });
     
-    await productsController.listProducts(req, res)
+    await productsController.productsController.listProducts(req, res)
 
     expect(res.status).to.have.been.calledWith(200)
   });
@@ -35,7 +35,7 @@ describe('Teste de unidade do controller de produtos', function () {
       .stub(productsService, 'getById')
       .resolves({ type: null, message: products.oneProduct });
     
-    await productsController.listById(req, res);
+    await productsController.productsController.listById(req, res);
 
     expect(res.status).to.have.been.calledWith(200)
   })
@@ -50,7 +50,7 @@ describe('Teste de unidade do controller de produtos', function () {
       .stub(productsService, 'getById')
       .resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
 
-    await productsController.listById(req, res);
+    await productsController.productsController.listById(req, res);
 
     expect(res.status).to.have.been.calledWith(404)
   })
@@ -66,7 +66,7 @@ describe('Teste de unidade do controller de produtos', function () {
         .stub(productsService, 'createProduct')
         .resolves({ type: 'INVALID_VALUE', response: { message: '"name" must be at least 5 characters long' } });
       
-      await productsController.createProduct(req, res);
+      await productsController.productsController.createProduct(req, res);
 
       expect(res.status).to.have.been.calledWith(422)
     })
@@ -81,7 +81,7 @@ describe('Teste de unidade do controller de produtos', function () {
         .stub(productsService, 'createProduct')
         .resolves({ type: null, response: { message: { id: 6, name: 'ProdutoX' } } });
 
-      await productsController.createProduct(req, res);
+      await productsController.productsController.createProduct(req, res);
 
       expect(res.status).to.have.been.calledWith(201)
     })
