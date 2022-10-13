@@ -22,4 +22,13 @@ const createProduct = async (req, res) => {
   res.status(201).json(response);
 };
 
-module.exports = { listProducts, listById, createProduct };
+const deleteById = async (req, res) => {
+  const { id } = req.params;
+  const { type, response } = await productsService.productsService.deleteById(id);
+
+  if (type) return res.status(404).json(response);
+
+  res.status(204).json();
+};
+
+module.exports = { listProducts, listById, createProduct, deleteById };

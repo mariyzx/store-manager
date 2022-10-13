@@ -24,4 +24,11 @@ const insert = async (product) => {
   return finalObj;
 };
 
-module.exports = { findAll, findById, insert };
+const deleteById = async (id) => {
+  await connection.execute(
+    'DELETE FROM StoreManager.products WHERE id = ?',
+    [id],
+  );
+};
+
+module.exports = { findAll, findById, insert, deleteById };
