@@ -1,4 +1,4 @@
-const { productsModel } = require('../../models');
+const { productsModel, salesModel } = require('../../models');
 const { idSchema, nameSchema } = require('./schemas');
 
 const validateId = (id) => {
@@ -30,4 +30,14 @@ const validateProductExist = async (id) => {
   return { type: null, message: '' };
 };
 
-module.exports = { validateId, validateName, validateProductExist };
+const validateSaleExist = async (id) => {
+  const sale = await salesModel.getById(id);
+
+  if (!sale || sale.length === 0) {
+    return { type: 'SALE_NOT_FOUND', response: { message: 'Sale not found' } };
+  }
+
+  return { type: null, message: '' };
+};
+
+module.exports = { validateId, validateName, validateProductExist, validateSaleExist };

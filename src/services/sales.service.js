@@ -1,5 +1,5 @@
 const models = require('../models');
-const { validateId } = require('./validations/validationsInputValues');
+const { validateId, validateSaleExist } = require('./validations/validationsInputValues');
 
 const getAll = async () => {
   const sales = await models.salesModel.getAll();
@@ -19,4 +19,16 @@ const getById = async (id) => {
   return { type: null, response: sales };
 };
 
-module.exports = { getAll, getById };
+const deleteById = async (id) => {
+  let error = validateId(id);
+  if (error.type) return error;
+
+  error = await validateSaleExist(id);
+  if (error.type) return error;
+
+  await models.salesModel.deleteById(id);
+
+  return { type: null, response: { message: '' } };
+};
+
+module.exports = { getAll, getById, deleteById };
