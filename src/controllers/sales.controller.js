@@ -22,4 +22,16 @@ const deleteById = async (req, res) => {
   res.status(204).json();
 };
 
-module.exports = { getAll, listById, deleteById };
+const update = async (req, res) => {
+  const { id } = req.params;
+  const products = req.body;
+
+  const result = await services.salesService.update(Number(id), products);
+  if (result.type) {
+    res.status(404).json(result.message);
+  } else {
+    return res.status(200).json(result.message);
+  }
+};
+
+module.exports = { getAll, listById, deleteById, update };

@@ -31,4 +31,15 @@ const deleteById = async (id) => {
   return { type: null, message: { message: '' } };
 };
 
-module.exports = { getAll, getById, deleteById };
+const update = async (saleId, products) => {
+  const error = await validateSaleExist(saleId);
+  if (error.type) return error;
+
+  await models.salesModel.update(saleId, products);
+
+  const prod = await models.salesModel.findProductBySaleId(saleId);
+
+  return { type: null, message: { saleId, itemsUpdated: prod } };
+};
+
+module.exports = { getAll, getById, deleteById, update };
