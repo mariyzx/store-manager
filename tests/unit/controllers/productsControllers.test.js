@@ -64,7 +64,7 @@ describe('Teste de unidade do controller de produtos', function () {
       res.json = sinon.stub().returns();
       sinon
         .stub(productsService, 'createProduct')
-        .resolves({ type: 'INVALID_VALUE', response: { message: '"name" must be at least 5 characters long' } });
+        .resolves({ type: 'INVALID_VALUE', message: { message: '"name" must be at least 5 characters long' } });
       
       await productsController.productsController.createProduct(req, res);
 
@@ -79,7 +79,7 @@ describe('Teste de unidade do controller de produtos', function () {
       res.json = sinon.stub().returns();
       sinon
         .stub(productsService, 'createProduct')
-        .resolves({ type: null, response: { message: { id: 6, name: 'ProdutoX' } } });
+        .resolves({ type: null, message: { message: { id: 6, name: 'ProdutoX' } } });
 
       await productsController.productsController.createProduct(req, res);
 

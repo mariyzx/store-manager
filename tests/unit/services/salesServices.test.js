@@ -19,7 +19,7 @@ describe('Testes de unidade do service de sales', function () {
     sinon.stub(models.salesModel, 'getById').resolves(sales);
 
     const result = await services.salesService.getById(1);
-    expect(result.response).to.be.deep.equal(sales)
+    expect(result.message).to.be.deep.equal(sales)
   })
 
   it('Recuperando uma venda que não existe a partir de seu id', async function () {

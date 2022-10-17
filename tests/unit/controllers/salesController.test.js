@@ -33,7 +33,7 @@ describe('Testes de  unidade do controller de vendas', function () {
     res.json = sinon.stub().returns();
     sinon
       .stub(services.salesService, 'getById')
-      .resolves({ type: null, response: sales[0] });
+      .resolves({ type: null, message: sales[0] });
 
     await controller.salesController.listById(req, res)
 
@@ -48,7 +48,7 @@ describe('Testes de  unidade do controller de vendas', function () {
     res.json = sinon.stub().returns();
     sinon
       .stub(services.salesService, 'getById')
-      .resolves({ type: 'INVALID_VALUE', response: { message: '"id" must be a number' } });
+      .resolves({ type: 'INVALID_VALUE', message: { message: '"id" must be a number' } });
 
     await controller.salesController.listById(req, res)
 
@@ -63,7 +63,7 @@ describe('Testes de  unidade do controller de vendas', function () {
     res.json = sinon.stub().returns();
     sinon
       .stub(services.salesService, 'deleteById')
-      .resolves({ type: null, response: { message: '' } });
+      .resolves({ type: null, message: { message: '' } });
 
     await controller.salesController.deleteById(req, res)
 
@@ -78,7 +78,7 @@ describe('Testes de  unidade do controller de vendas', function () {
     res.json = sinon.stub().returns();
     sinon
       .stub(services.salesService, 'deleteById')
-      .resolves({ type: 'INVALID_VALUE', response: { message: '"id" must be a number' } });
+      .resolves({ type: 'INVALID_VALUE', message: { message: '"id" must be a number' } });
 
     await controller.salesController.deleteById(req, res)
 

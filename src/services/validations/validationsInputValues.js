@@ -13,7 +13,7 @@ const validateName = (name) => {
   if (error) {
  return {
     type: 'INVALID_VALUE',
-   response: { message: '"name" length must be at least 5 characters long' },
+   message: { message: '"name" length must be at least 5 characters long' },
   }; 
 }
   
@@ -24,7 +24,7 @@ const validateProductExist = async (id) => {
   const product = await productsModel.findById(id);
 
   if (!product || product.length === 0) {
-    return { type: 'PRODUCT_NOT_FOUND', response: { message: 'Product not found' } };
+    return { type: 'PRODUCT_NOT_FOUND', message: { message: 'Product not found' } };
   }
 
   return { type: null, message: '' };
@@ -34,7 +34,7 @@ const validateSaleExist = async (id) => {
   const sale = await salesModel.getById(id);
 
   if (!sale || sale.length === 0) {
-    return { type: 'SALE_NOT_FOUND', response: { message: 'Sale not found' } };
+    return { type: 'SALE_NOT_FOUND', message: { message: 'Sale not found' } };
   }
 
   return { type: null, message: '' };

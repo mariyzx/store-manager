@@ -40,7 +40,7 @@ describe('Testes de unidade do service de produtos', function () {
       const result = await productService.productsService.createProduct('aa')
 
       expect(result.type).to.equal('INVALID_VALUE');
-      expect(result.response.message).to.equal('"name" length must be at least 5 characters long')
+      expect(result.message.message).to.equal('"name" length must be at least 5 characters long')
     })
 
     it('Com valores válidos', async function () {

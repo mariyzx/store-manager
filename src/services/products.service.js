@@ -14,9 +14,9 @@ const getById = async (id) => {
   const products = await productsModel.productsModel.findById(id);
   
   if (!products || products.length === 0) {
-    return { type: 'PRODUCT_NOT_FOUND', response: { message: 'Product not found' } };
+    return { type: 'PRODUCT_NOT_FOUND', message: { message: 'Product not found' } };
   } 
-    return { type: null, response: products[0] };
+  return { type: null, message: products[0] };
 };
 
 const createProduct = async (product) => {
@@ -26,7 +26,7 @@ const createProduct = async (product) => {
 
   const newProduct = await productsModel.productsModel.insert(product);
 
-  return { type: null, response: newProduct };
+  return { type: null, message: newProduct };
 };
 
 const deleteById = async (id) => {
@@ -38,7 +38,7 @@ const deleteById = async (id) => {
 
   await productsModel.productsModel.deleteById(id);
 
-  return { type: null, response: { message: '' } };
+  return { type: null, message: { message: '' } };
 };
 
 module.exports = { getAll, getById, createProduct, deleteById };

@@ -14,9 +14,9 @@ const getById = async (id) => {
   const sales = await models.salesModel.getById(id);
 
   if (!sales || sales.length === 0) {
-    return { type: 'SALE_NOT_FOUND', response: { message: 'Sale not found' } };
+    return { type: 'SALE_NOT_FOUND', message: { message: 'Sale not found' } };
   }
-  return { type: null, response: sales };
+  return { type: null, message: sales };
 };
 
 const deleteById = async (id) => {
@@ -28,7 +28,7 @@ const deleteById = async (id) => {
 
   await models.salesModel.deleteById(id);
 
-  return { type: null, response: { message: '' } };
+  return { type: null, message: { message: '' } };
 };
 
 module.exports = { getAll, getById, deleteById };
