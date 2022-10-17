@@ -18,13 +18,18 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/products/1",
-    "url": "http://localhost:3000/sales/1",
-    "method": "GET",
+    "url": "http://localhost:3000/products/1",
+    "method": "PUT",
     "sortNum": 0,
     "created": "2022-10-11T21:15:19.616Z",
-    "modified": "2022-10-13T16:24:56.806Z",
+    "modified": "2022-10-17T14:36:22.542Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"a\"\n}",
+      "form": []
+    },
     "tests": []
   }
 ]

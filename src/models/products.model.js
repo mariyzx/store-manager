@@ -31,4 +31,11 @@ const deleteById = async (id) => {
   );
 };
 
-module.exports = { findAll, findById, insert, deleteById };
+const update = async (name, id) => {
+  await connection.execute(
+    'UPDATE StoreManager.products SET name = ? WHERE id = ?',
+    [name, id],
+  );
+};
+
+module.exports = { findAll, findById, insert, deleteById, update };

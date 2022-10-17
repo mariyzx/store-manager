@@ -31,4 +31,15 @@ const deleteById = async (req, res) => {
   res.status(204).json();
 };
 
-module.exports = { listProducts, listById, createProduct, deleteById };
+const update = async (req, res) => {
+  const id = Number(req.params.id);
+  const { name } = req.body;
+  const { type, message } = await productsService.productsService.update(name, id);
+
+  if (type === 'PRODUCT_NOT_FOUND') return res.status(404).json(message);
+  if (type === 'INVALID_VALUE') return res.status(422).json(message);
+
+  res.status(200).json(message);
+};
+
+module.exports = { listProducts, listById, createProduct, deleteById, update };

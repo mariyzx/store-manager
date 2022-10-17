@@ -41,4 +41,17 @@ const deleteById = async (id) => {
   return { type: null, message: { message: '' } };
 };
 
-module.exports = { getAll, getById, createProduct, deleteById };
+const update = async (name, id) => {
+  let error = validateName(name);
+  if (error.type) return error;
+
+  error = validateProductExist(id);
+  if (error.type) return error;
+
+  await productsModel.productsModel.update(name, id);
+  
+  const prod = await getById(id);
+  return prod;
+};
+
+module.exports = { getAll, getById, createProduct, deleteById, update };
