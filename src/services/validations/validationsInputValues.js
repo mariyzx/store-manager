@@ -22,7 +22,6 @@ const validateName = (name) => {
 
 const validateProductExist = async (id) => {
   const product = await productsModel.findById(id);
-
   if (!product || product.length === 0) {
     return { type: 'PRODUCT_NOT_FOUND', message: { message: 'Product not found' } };
   }
@@ -40,4 +39,53 @@ const validateSaleExist = async (id) => {
   return { type: null, message: '' };
 };
 
-module.exports = { validateId, validateName, validateProductExist, validateSaleExist };
+const keyExist = (products) => {
+  for (let i = 0; i < products.length; i += 1) {
+    if (!('productId' in products[i])) {
+      return { status: 400, message: '"productId" is required' };
+    } if (!('quantity' in products[i])) {
+      return { status: 400, message: '"quantity" is required' };
+    }
+  }
+};
+
+const quantValid = (products) => {
+  for (let i = 0; i < products.length; i += 1) {
+    if (products[i].quantity <= 0) {
+      return { status: 422, message: '"quantity" must be greater than or equal to 1' };
+    }
+  } 
+};
+
+const prodExist = async (products) => {
+  const productsId = products.map((prod) => prod.productId);
+  const result = productsId.map(async (prod) => {
+    const a = await validateProductExist(prod);
+    if (a.type) return a;
+  });
+  const treated = await Promise.all(result); // tem undefined
+  const valid = treated.map((a) => a !== undefined); // tem false
+  const n = valid.map((b) => b !== false);
+  for (let i = 0; i < n.length; i += 1) {
+    if (n[i]) {
+      return { status: 404, message: 'Product not found' };
+    }
+  }
+};
+
+const validateSaleProduct = async (products) => {
+  if (keyExist(products)) {
+    return keyExist(products);
+  }
+  if (quantValid(products)) {
+    return quantValid(products);
+  }
+  if (prodExist(products)) {
+    const a = await prodExist(products);
+    return a;
+  }
+};
+
+module.exports = {
+  validateId, validateName, validateProductExist, validateSaleExist, validateSaleProduct,
+};

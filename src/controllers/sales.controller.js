@@ -34,4 +34,14 @@ const update = async (req, res) => {
   }
 };
 
-module.exports = { getAll, listById, deleteById, update };
+const insert = async (req, res) => {
+  const products = req.body;
+  const response = await services.salesService.insert(products);
+  if (response.status) {
+    return res.status(response.status).json({ message: response.message });
+  }
+
+  res.status(201).json(response.message);
+};
+
+module.exports = { getAll, listById, deleteById, update, insert };
