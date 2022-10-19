@@ -23,16 +23,16 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/sales/1",
-    "url": "http://localhost:3000/products/search?q=Cap",
+    "url": "http://localhost:3000/products/search?q=Martelo",
     "method": "GET",
     "sortNum": 0,
     "created": "2022-10-17T17:00:56.769Z",
-    "modified": "2022-10-19T17:14:11.913Z",
+    "modified": "2022-10-19T22:31:47.790Z",
     "headers": [],
     "params": [
       {
         "name": "q",
-        "value": "Cap",
+        "value": "Martelo",
         "isPath": false
       }
     ],

@@ -39,10 +39,10 @@ const update = async (name, id) => {
 };
 
 const findByQuery = async (q) => {
-  const [products] = await connection.execute(
+  const [[products]] = await connection.execute(
     `SELECT * FROM StoreManager.products WHERE name LIKE '%${q}%'`,
   );
-    console.log(products);
+
   return products;
 };
 
