@@ -25,10 +25,9 @@ const deleteById = async (req, res) => {
 const update = async (req, res) => {
   const { id } = req.params;
   const products = req.body;
-
   const result = await services.salesService.update(Number(id), products);
-  if (result.type) {
-    res.status(404).json(result.message);
+  if (result.status) {
+    res.status(result.status).json({ message: result.message });
   } else {
     return res.status(200).json(result.message);
   }

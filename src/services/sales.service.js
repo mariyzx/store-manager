@@ -34,14 +34,15 @@ const deleteById = async (id) => {
 };
 
 const update = async (saleId, products) => {
-  const error = await validateSaleExist(saleId);
-  if (error.type) return error;
+  const { type } = await validateSaleExist(saleId);
+  if (type) return { status: 404, message: 'Sale not found' };
 
-  await models.salesModel.update(saleId, products);
+  const error = await validateSaleProduct(products);
+  if (error) return error;
 
-  const prod = await models.salesModel.findProductBySaleId(saleId);
+  const prod = await models.salesModel.update(saleId, products);
 
-  return { type: null, message: { saleId, itemsUpdated: prod } };
+  return { type: null, message: prod };
 };
 
 const insert = async (products) => {

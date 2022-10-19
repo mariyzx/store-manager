@@ -32,12 +32,16 @@ const deleteById = async (id) => {
 };
 
 const update = async (saleId, products) => {
-  const result = products.map(({ productId, quantity }) => connection.execute(
+  const result = products.map(async ({ productId, quantity }) => connection.execute(
     'UPDATE StoreManager.sales_products SET quantity = ? WHERE product_id = ? AND sale_id = ?',
     [quantity, productId, saleId],
   ));
 
   await Promise.all(result);
+
+  const updatedProduct = await getById(saleId);
+
+  return { saleId, itemsUpdated: updatedProduct };
 };
 
 const findProductBySaleId = async (saleId) => {
