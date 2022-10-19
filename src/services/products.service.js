@@ -54,4 +54,11 @@ const update = async (name, id) => {
   return prod;
 };
 
-module.exports = { getAll, getById, createProduct, deleteById, update };
+const findByQuery = async (q) => {
+  const products = await productsModel.productsModel.findByQuery(q);
+  if (q.length === 0) return getAll();
+  
+  return { type: null, message: [products] };
+};
+
+module.exports = { getAll, getById, createProduct, deleteById, update, findByQuery };

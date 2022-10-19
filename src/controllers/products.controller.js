@@ -42,4 +42,10 @@ const update = async (req, res) => {
   res.status(200).json(message);
 };
 
-module.exports = { listProducts, listById, createProduct, deleteById, update };
+const findByQuery = async (req, res) => {
+  const { q } = req.query;
+  const result = await productsService.productsService.findByQuery(q);
+  res.status(200).json(result.message);
+};
+
+module.exports = { listProducts, listById, createProduct, deleteById, update, findByQuery };

@@ -23,13 +23,19 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/sales/1",
-    "url": "http://localhost:3000/sales",
-    "method": "POST",
+    "url": "http://localhost:3000/products/search?q=Cap",
+    "method": "GET",
     "sortNum": 0,
     "created": "2022-10-17T17:00:56.769Z",
-    "modified": "2022-10-19T16:21:58.320Z",
+    "modified": "2022-10-19T17:14:11.913Z",
     "headers": [],
-    "params": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "Cap",
+        "isPath": false
+      }
+    ],
     "body": {
       "type": "json",
       "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  },\n  {\n    \"productId\": 1,\n    \"quantity\": 2\n  }\n]",
